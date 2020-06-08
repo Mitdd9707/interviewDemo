@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StatusBar, Image} from 'react-native';
 import {Header} from '../component';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
-import theme from '../helper/theme';
+import theme from '../asset/theme';
 const {style} = theme;
 
 const Profile = () => {

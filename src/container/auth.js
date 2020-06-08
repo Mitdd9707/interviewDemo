@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, StatusBar, Alert} from 'react-native';
 import {connect} from 'react-redux';
-import theme from '../helper/theme';
+import theme from '../asset/theme';
 const {style} = theme;
 
 const Auth = (props) => {

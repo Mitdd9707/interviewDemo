@@ -18,6 +18,7 @@ export const storeUserProfile = (params) => async (dispatch) => {
     return {error: e.message};
   }
 };
+
 export const logout = () => async (dispatch) => {
   try {
     dispatch({

@@ -1,6 +1,6 @@
 import {StyleSheet, Platform, Dimensions} from 'react-native';
 import _ from 'lodash';
-import utils from './utils';
+import utils from '../helper/utils';
 
 const {height, width} = Dimensions.get('window');
 

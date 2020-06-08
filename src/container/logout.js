@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import {Header, Button} from '../component';
 import {logout} from '../action';
-import theme from '../helper/theme';
+import theme from '../asset/theme';
 const {style} = theme;
 
 const Logout = (props) => {

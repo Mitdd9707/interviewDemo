@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Label from './label';
-import theme from '../helper/theme';
+import theme from '../asset/theme';
 import {images} from '../asset';
 const {style, colors} = theme;
 

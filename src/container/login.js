@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Label, Input, Button, Header} from '../component';
 import {storeUserProfile} from '../action';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
-import theme from '../helper/theme';
+import theme from '../asset/theme';
 const {style} = theme;
 
 const Login = (props) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {View, Image} from 'react-native';
-import theme from '../helper/theme';
+import theme from '../asset/theme';
 import Label from './label';
 import {images} from '../asset';
 const {colors, style} = theme;

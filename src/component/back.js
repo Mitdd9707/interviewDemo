@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity, StyleSheet} from 'react-native';
-import theme from '../helper/theme';
+import theme from '../asset/theme';
 import Label from './label';
 const {colors, style} = theme;
 

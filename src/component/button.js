@@ -2,7 +2,7 @@ import React from 'react';
 import {TouchableOpacity, ActivityIndicator} from 'react-native';
 import PropTypes from 'prop-types';
 import Label from './label';
-import theme from '../helper/theme';
+import theme from '../asset/theme';
 
 const {style} = theme;
 

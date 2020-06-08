@@ -11,7 +11,7 @@ import Dashboard from './container/dashboard';
 import Profile from './container/profile';
 import Logout from './container/logout';
 import Setting from './container/setting';
-import theme from './helper/theme';
+import theme from './asset/theme';
 const {style, colors} = theme;
 const {width} = Dimensions.get('window');
 
@@ -24,7 +24,7 @@ const tabNav = createBottomTabNavigator(
         tabBarComponent: (props) => CustomComponent(props, {paddingLeft: 0}),
         tabBarIcon: (
           <View style={style.flex}>
-            <Icon name={'md-settings'} size={30} color={colors.primary} />
+            <Icon name={'md-pie'} size={30} color={colors.primary} />
           </View>
         ),
       },
@@ -36,7 +36,7 @@ const tabNav = createBottomTabNavigator(
           CustomComponent(props, {paddingLeft: width / 4}),
         tabBarIcon: (
           <View style={style.flex}>
-            <Icon name={'md-settings'} size={30} color={colors.primary} />
+            <Icon name={'md-person'} size={30} color={colors.primary} />
           </View>
         ),
       },
@@ -60,7 +60,7 @@ const tabNav = createBottomTabNavigator(
           CustomComponent(props, {paddingLeft: (width / 4) * 3}),
         tabBarIcon: (
           <View style={style.flex}>
-            <Icon name={'md-settings'} size={30} color={colors.primary} />
+            <Icon name={'md-log-out'} size={30} color={colors.primary} />
           </View>
         ),
       },
