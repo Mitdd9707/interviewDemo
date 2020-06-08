@@ -1,17 +1,30 @@
 import * as types from '../action-type';
-// import api, {urls} from '../api';
+import api, {urls, setAuthToken} from '../api';
 
-export const fetchUserProfile = (params) => async (dispatch) => {
+export const storeUserProfile = (params) => async (dispatch) => {
   try {
-    // const response = await api.post(urls.login, params);
-    console.log(params);
-    const {error, message, data} = response.data;
-    if (!data || error) {
-      return Promise.reject(message || 'Something went wrong');
+    const response = await api.post(urls.login, params);
+    const {error, token} = response.data;
+    if (!token || error) {
+      return {error: error || 'Something went wrong'};
     }
-    dispatch({type: types.STORE_USER_PROFILE, payload: {user: data}});
-    return Promise.resolve(data);
+    setAuthToken(token);
+    dispatch({
+      type: types.STORE_USER_PROFILE,
+      payload: {user: {token, ...params}},
+    });
+    return {user: {token, ...params}};
   } catch (e) {
-    return Promise.reject(e);
+    return {error: e.message};
+  }
+};
+export const logout = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: types.ON_LOGOUT,
+    });
+    return true;
+  } catch (e) {
+    return {error: e.message};
   }
 };

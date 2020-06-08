@@ -12,7 +12,7 @@ const Setting = () => {
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="always"
         showsVerticalScrollIndicator={false}>
-        <Header title="Profile" styles={style.mbxxl} />
+        <Header title="Setting" styles={style.mbxxl} />
       </KeyboardAwareScrollView>
     </View>
   );

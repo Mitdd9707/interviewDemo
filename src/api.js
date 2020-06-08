@@ -9,7 +9,7 @@ export const urls = {
 };
 
 export const setAuthToken = (token) => {
-  api.defaults.headers.common['Authorizationkey'] = token;
+  api.defaults.headers.common['Auth'] = token;
 };
 
 export default api;

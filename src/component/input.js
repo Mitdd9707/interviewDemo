@@ -18,7 +18,7 @@ const {style, colors} = theme;
  */
 export default function Input(props) {
   const [state, setState] = useState({
-    secureText: false,
+    secureText: props.secureTextEntry,
   });
 
   /**
@@ -52,16 +52,14 @@ export default function Input(props) {
       <View
         style={[
           styles.inputContainer,
-          multilines
-            ? {height: multilines, alignItems: 'flex-start', paddingTop: 10}
-            : null,
+          multilines ? {height: multilines, alignItems: 'flex-start'} : null,
         ]}>
         {icon ? <Icon name={icon} size={20} color={colors.primary} /> : null}
         <TextInput
           textContentType="newPassword"
           style={[
             styles.input,
-            multilines ? {height: multilines} : null,
+            multilines ? {height: multilines, textAlignVertical: 'top'} : null,
             stl,
             {color: colors.black},
           ]}

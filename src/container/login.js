@@ -1,20 +1,21 @@
 import React, {useState} from 'react';
-import {View, StatusBar} from 'react-native';
+import {View, StatusBar, Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {Label, Input, Button, Header} from '../component';
-import {fetchUserProfile} from '../action';
+import {storeUserProfile} from '../action';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import theme from '../helper/theme';
 const {style} = theme;
 
-const Login = ({navigation}) => {
+const Login = (props) => {
+  const {navigation} = props;
   const [state, setState] = useState({
-    email: null,
+    email: 'eve.holt@reqres.in',
     emailError: null,
-    password: null,
+    password: 'cityslicka',
     passwordError: null,
   });
-  const onSubmitLogin = () => {
+  const onSubmitLogin = async () => {
     let emailError = null;
     let passwordError = null;
     if (!state.email) {
@@ -29,8 +30,13 @@ const Login = ({navigation}) => {
     }
     setState({...state, emailError, passwordError});
     if (!emailError && !passwordError) {
-      fetchUserProfile({email: state.email, password: state.password});
-      // navigation.navigate('tabNav');
+      const params = {email: state.email, password: state.password};
+      const response = await props.storeUserProfile(params);
+      if (!response || response.error) {
+        Alert.alert('Login Failed.', response.error || 'Something went wrong');
+      } else {
+        navigation.replace('Auth');
+      }
     }
   };
   return (
@@ -79,5 +85,8 @@ const Login = ({navigation}) => {
 };
 
 const mapStatesToProps = ({user}) => ({user});
-const mapDispatchToProps = {fetchUserProfile};
+const mapDispatchToProps = {
+  storeUserProfile,
+};
+
 export default connect(mapStatesToProps, mapDispatchToProps)(Login);

@@ -4,6 +4,7 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator, BottomTabBar} from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Auth from './container/auth';
 import Login from './container/login';
 import Signup from './container/signup';
 import Dashboard from './container/dashboard';
@@ -116,13 +117,14 @@ function CustomComponent(props, styles) {
 
 const Router = createStackNavigator(
   {
-    Login: {screen: Login},
-    Signup: {screen: Signup},
+    Auth,
+    Login,
+    Signup,
     tabNav,
   },
   {
     headerMode: 'none',
-    initialRouteName: 'Login',
+    initialRouteName: 'Auth',
   },
 );
 

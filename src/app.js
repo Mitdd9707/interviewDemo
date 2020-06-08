@@ -3,11 +3,10 @@ import {StyleSheet, View} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
-import getStore from './store';
+import {store, persistor} from './store';
 import Router from './router';
 
 GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
-const {store, persistor} = getStore();
 
 const App = () => {
   /**
