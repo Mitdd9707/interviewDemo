@@ -1,21 +1,33 @@
-import React from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Label from './label';
 import theme from '../helper/theme';
+import {images} from '../asset';
 const {style, colors} = theme;
 
 /**
  * Input
  */
 export default function Input(props) {
+  const [state, setState] = useState({
+    secureText: false,
+  });
+
   /**
    * Render method
    * @return {Component}
    */
   const {
     style: stl,
+    error,
     containerStyle,
     icon,
     multilines,
@@ -27,10 +39,8 @@ export default function Input(props) {
     <View
       style={[
         styles.container,
+        error ? style.mbxl : style.mbl,
         containerStyle,
-        {
-          borderColor: colors.silver,
-        },
       ]}>
       <View style={[style.row, style.alignCenter]}>
         {labelIcon ? (
@@ -61,6 +71,7 @@ export default function Input(props) {
           multiline={!!multilines}
           inputAccessoryViewID={multilines ? 'multilineInput' : null}
           {...props}
+          secureTextEntry={state.secureText}
         />
         {Platform.OS == 'ios' ? (
           <InputAccessoryView nativeID={'multilineInput'}>
@@ -82,6 +93,22 @@ export default function Input(props) {
             </View>
           </InputAccessoryView>
         ) : null}
+        {props.secureTextEntry ? (
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => setState({secureText: !state.secureText})}>
+            <Icon
+              name={state.secureText ? 'md-eye-off' : 'md-eye'}
+              size={26}
+              color={colors.primary}
+            />
+          </TouchableOpacity>
+        ) : null}
+      </View>
+      <View style={{position: 'absolute', bottom: -24, right: 0}}>
+        {error ? (
+          <Label style={[styles.labelStyle, style.danger]}>{error}</Label>
+        ) : null}
       </View>
     </View>
   );
@@ -90,7 +117,6 @@ const styles = StyleSheet.create({
   container: {
     borderBottomWidth: 1,
     borderColor: colors.silver,
-    ...style.mbl,
   },
   labelStyle: {
     color: colors.primary,
@@ -112,8 +138,7 @@ const styles = StyleSheet.create({
 
 Input.propTypes = {
   style: PropTypes.any,
+  error: PropTypes.string,
   containerStyle: PropTypes.object,
   icon: PropTypes.string,
-  hintBtn: PropTypes.object,
-  bordered: PropTypes.bool,
 };

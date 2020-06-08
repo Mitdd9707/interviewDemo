@@ -1,13 +1,17 @@
 import * as types from '../action-type';
-import Api, {urls} from '../api';
+// import api, {urls} from '../api';
 
-export const fetchUserProfile = (params) => {
-  return {
-    type: types.FETCH_USER_PROFILE_START,
-    params,
-  };
-};
-export const fetchProfile = async (params) => {
-  const response = await Api.get(urls.profile, params);
-  return response;
+export const fetchUserProfile = (params) => async (dispatch) => {
+  try {
+    // const response = await api.post(urls.login, params);
+    console.log(params);
+    const {error, message, data} = response.data;
+    if (!data || error) {
+      return Promise.reject(message || 'Something went wrong');
+    }
+    dispatch({type: types.STORE_USER_PROFILE, payload: {user: data}});
+    return Promise.resolve(data);
+  } catch (e) {
+    return Promise.reject(e);
+  }
 };

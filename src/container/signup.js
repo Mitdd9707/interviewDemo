@@ -1,19 +1,39 @@
-import React from 'react';
-import {
-  View,
-  StatusBar,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import React, {useState} from 'react';
+import {View, StatusBar} from 'react-native';
 import {Label, Input, Button, Header, Back} from '../component';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import theme from '../helper/theme';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {images} from '../asset';
-const {style, colors} = theme;
+const {style} = theme;
 
 const Signup = ({navigation}) => {
+  const [state, setState] = useState({
+    name: null,
+    nameError: null,
+    email: null,
+    emailError: null,
+    password: null,
+    passwordError: null,
+    desc: null,
+    descError: null,
+  });
+  const onSubmitSignUp = () => {
+    let emailError = null;
+    let passwordError = null;
+    if (!state.email) {
+      emailError = 'Email is required.';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(state.email)) {
+      emailError = 'Invalid Email.';
+    }
+    if (!state.password) {
+      passwordError = 'Password is required.';
+    } else if (state.password.length < 6) {
+      passwordError = 'Password must be at least 6 character long.';
+    }
+    setState({...state, emailError, passwordError});
+    if (!emailError && !passwordError) {
+      navigation.navigate('tabNav');
+    }
+  };
   return (
     <View style={style.container}>
       <StatusBar barStyle="light-content" />
@@ -32,11 +52,7 @@ const Signup = ({navigation}) => {
             secureTextEntry
           />
           <Input label="Description" multilines={70} icon="md-person" />
-          <Button
-            title="SIGNUP"
-            styles={style.mtl}
-            onPress={() => navigation.navigate('tabNav')}
-          />
+          <Button title="SIGNUP" styles={style.mtl} onPress={onSubmitSignUp} />
         </View>
         <View style={[style.center, style.row, style.mvxxl]}>
           <Label style={style.black}>Already have an account? </Label>
