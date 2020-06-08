@@ -47,9 +47,7 @@ const spaces = {
   xl: 20,
   xxl: 30,
   xxxl: 40,
-  xxxxl: 50,
-  xxxxxl: 60,
-  big: 65,
+  big: 50,
 };
 const border = {border: 2, borderColor: 'white'};
 const style = {

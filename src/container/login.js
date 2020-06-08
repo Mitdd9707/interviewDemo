@@ -1,10 +1,9 @@
 import React from 'react';
-import {View, StatusBar, Image} from 'react-native';
-import {Label, Input, Button} from '../component';
+import {View, StatusBar} from 'react-native';
+import {Label, Input, Button, Header} from '../component';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import theme from '../helper/theme';
-import {images} from '../asset';
-const {style, colors} = theme;
+const {style} = theme;
 
 const Login = ({navigation}) => {
   return (
@@ -13,14 +12,7 @@ const Login = ({navigation}) => {
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="always"
         showsVerticalScrollIndicator={false}>
-        <View style={[style.pvxxl, style.mbxxl, style.center, style.bgsilver]}>
-          <Image
-            source={images.logo}
-            resizeMode="contain"
-            style={{width: 150, height: 150, tintColor: colors.primary}}
-          />
-          <Label style={[style.big, style.black]}>React Native</Label>
-        </View>
+        <Header title="React Native" styles={style.mbxxl} />
         <View style={[style.phxxl, style.flex]}>
           <Input label="Enter Email" icon="ios-mail" mandatory />
           <Input
@@ -29,7 +21,11 @@ const Login = ({navigation}) => {
             mandatory
             secureTextEntry
           />
-          <Button title="LOGIN" styles={style.mtl} />
+          <Button
+            title="LOGIN"
+            styles={style.mtl}
+            onPress={() => navigation.navigate('tabNav')}
+          />
         </View>
         <View style={[style.center, style.row, style.mvxxl]}>
           <Label style={style.black}>Yet not registered? </Label>

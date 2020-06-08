@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Text as RNText} from 'react-native';
 import PropTypes from 'prop-types';
 import theme from '../helper/theme';
-const {colors, style} = theme;
+const {colors} = theme;
 
 /**
  * Label
