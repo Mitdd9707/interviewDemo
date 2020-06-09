@@ -32,11 +32,11 @@ const colors = {
   transparent: 'transparent',
 };
 
-const fontFamilies = {
-  myriadSemi: 'MyriadPro-Semibold',
-  myriadRegular: 'MyriadPro-Regular',
-  myriadBold: 'MyriadPro-Bold',
-};
+// const fontFamilies = {
+//   myriadSemi: 'MyriadPro-Semibold',
+//   myriadRegular: 'MyriadPro-Regular',
+//   myriadBold: 'MyriadPro-Bold',
+// };
 
 const spaces = {
   o: 0,
@@ -135,7 +135,7 @@ _.forIn(
   (value, key) => (style[key] = {fontSize: value, lineHeight: value + 4}),
 );
 _.forIn(colors, (value, key) => (style[key] = {color: value}));
-_.forIn(fontFamilies, (value, key) => (style[key] = {fontFamily: value}));
+// _.forIn(fontFamilies, (value, key) => (style[key] = {fontFamily: value}));
 _.forIn(spaces, (value, key) => (style[`m${key}`] = {margin: value}));
 _.forIn(spaces, (value, key) => (style[`mb${key}`] = {marginBottom: value}));
 _.forIn(spaces, (value, key) => (style[`ml${key}`] = {marginLeft: value}));
@@ -164,7 +164,7 @@ export default {
   fontSizes,
   colors,
   style,
-  fontFamilies,
+  // fontFamilies,
   border,
   screen: {height, width},
 };
