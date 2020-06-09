@@ -12,10 +12,11 @@ import Profile from './container/profile';
 import Logout from './container/logout';
 import Setting from './container/setting';
 import theme from './asset/theme';
+import {CustomComponent} from './helper/functions';
+
 const {style, colors} = theme;
 const {width} = Dimensions.get('window');
 
-const TabBarComponent = (props) => <BottomTabBar {...props} />;
 const tabNav = createBottomTabNavigator(
   {
     Dashboard: {
@@ -83,37 +84,6 @@ const tabNav = createBottomTabNavigator(
     },
   },
 );
-
-function CustomComponent(props, styles) {
-  return (
-    <View>
-      <View style={styles}>
-        <View
-          style={{
-            height: 2,
-            width: width / 4,
-            backgroundColor: colors.primary,
-          }}
-        />
-      </View>
-      <TabBarComponent
-        {...props}
-        allowFontScaling={false}
-        labelStyle={{
-          ...style.scriptsize,
-          ...style.primary,
-          ...style.pvs,
-          ...style.myriadRegular,
-        }}
-        style={{
-          height: 60,
-          ...style.pts,
-          ...style.bgwhite,
-        }}
-      />
-    </View>
-  );
-}
 
 const Router = createStackNavigator(
   {

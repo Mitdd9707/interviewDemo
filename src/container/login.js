@@ -5,6 +5,7 @@ import {Label, Input, Button, Header} from '../component';
 import {storeUserProfile} from '../action';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import theme from '../asset/theme';
+import {validateEmailPass} from '../helper/functions';
 const {style} = theme;
 
 const Login = (props) => {
@@ -15,28 +16,23 @@ const Login = (props) => {
     password: 'cityslicka',
     passwordError: null,
   });
+
   const onSubmitLogin = async () => {
-    let emailError = null;
-    let passwordError = null;
-    if (!state.email) {
-      emailError = 'Email is required.';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(state.email)) {
-      emailError = 'Invalid Email.';
+    const params = {email: state.email, password: state.password};
+    const validation = validateEmailPass(params);
+    if (validation.emailError || validation.passwordError) {
+      setState({
+        ...state,
+        emailError: validation.emailError,
+        passwordError: validation.passwordError,
+      });
+      return;
     }
-    if (!state.password) {
-      passwordError = 'Password is required.';
-    } else if (state.password.length < 6) {
-      passwordError = 'Password must be at least 6 character long.';
-    }
-    setState({...state, emailError, passwordError});
-    if (!emailError && !passwordError) {
-      const params = {email: state.email, password: state.password};
-      const response = await props.storeUserProfile(params);
-      if (!response || response.error) {
-        Alert.alert('Login Failed.', response.error || 'Something went wrong');
-      } else {
-        navigation.replace('Auth');
-      }
+    const response = await props.storeUserProfile(params);
+    if (!response || response.error) {
+      Alert.alert('Login Failed.', response.error || 'Something went wrong');
+    } else {
+      navigation.replace('Auth');
     }
   };
   return (

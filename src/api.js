@@ -6,6 +6,7 @@ const api = axios.create({
 
 export const urls = {
   login: 'api/login',
+  register: 'api/register',
 };
 
 export const setAuthToken = (token) => {

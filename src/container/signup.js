@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import {View, StatusBar, Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {Label, Input, Button, Header, Back} from '../component';
-import {storeUserProfile} from '../action';
+import {registerUser} from '../action';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
+import {validateEmailPass} from '../helper/functions';
 import theme from '../asset/theme';
 const {style} = theme;
 
@@ -19,33 +20,28 @@ const Signup = (props) => {
     desc: null,
     descError: null,
   });
+
   const onSubmitSignUp = async () => {
-    let emailError = null;
-    let passwordError = null;
-    if (!state.email) {
-      emailError = 'Email is required.';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(state.email)) {
-      emailError = 'Invalid Email.';
+    const params = {
+      name: state.name,
+      email: state.email,
+      password: state.password,
+      discription: state.desc,
+    };
+    const validation = validateEmailPass(params);
+    if (validation.emailError || validation.passwordError) {
+      setState({
+        ...state,
+        emailError: validation.emailError,
+        passwordError: validation.passwordError,
+      });
+      return;
     }
-    if (!state.password) {
-      passwordError = 'Password is required.';
-    } else if (state.password.length < 6) {
-      passwordError = 'Password must be at least 6 character long.';
-    }
-    setState({...state, emailError, passwordError});
-    if (!emailError && !passwordError) {
-      const params = {
-        name: state.name,
-        email: state.email,
-        password: state.password,
-        discription: state.desc,
-      };
-      const response = await props.storeUserProfile(params);
-      if (!response || response.error) {
-        Alert.alert('Signup Failed.', response.error || 'Something went wrong');
-      } else {
-        navigation.replace('tabNav');
-      }
+    const response = await props.registerUser(params);
+    if (!response || response.error) {
+      Alert.alert('Signup Failed.', response.error || 'Something went wrong');
+    } else {
+      navigation.replace('tabNav');
     }
   };
   return (
@@ -115,7 +111,7 @@ const Signup = (props) => {
 
 const mapStatesToProps = ({user}) => ({user});
 const mapDispatchToProps = {
-  storeUserProfile,
+  registerUser,
 };
 
 export default connect(mapStatesToProps, mapDispatchToProps)(Signup);
